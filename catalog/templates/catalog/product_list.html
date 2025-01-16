@@ -1,0 +1,16 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h1>商品リスト</h1>
+{% if products %}
+<ul>
+  {% for product in products %}
+  <li>
+    <a href="{{ product.get_absolute_url }}">{{ product }}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>このカタログには商品がございません。</p>
+{% endif %}
+{% endblock %}
