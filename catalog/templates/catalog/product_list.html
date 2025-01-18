@@ -2,11 +2,12 @@
 
 {% block content %}
 <h1>商品リスト</h1>
-{% if products %}
+{% if product_list %}
 <ul>
-  {% for product in products %}
+  {% for product in product_list %}
   <li>
     <a href="{{ product.get_absolute_url }}">{{ product }}</a>
+    - ¥{{ product.price }}
   </li>
   {% endfor %}
 </ul>

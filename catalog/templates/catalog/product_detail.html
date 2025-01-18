@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>商品：{{ product }}</h1>
+
+<h2>売り手：{{ product.vendor }}</h2>
+
+<p><strong>¥{{ product.price }}</strong></p>
+<p><strong>販売ステータス：{{ product.get_status_display }}</strong></p>
+<p>詳細：</p>
+<p>{{ product.info }}</p>
+{% endblock %}

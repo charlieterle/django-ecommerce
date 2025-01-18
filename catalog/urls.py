@@ -5,8 +5,8 @@ from . import views
 urlpatterns = [
     path("", views.index, name="index"),
     path("products/", views.ProductListView.as_view(), name="products"),
-    re_path(
-        r"^product/(?P<pk>\d+)$",
+    path(
+        "^product/<uuid:pk>",
         views.ProductDetailView.as_view(),
         name="product-detail",
     ),
