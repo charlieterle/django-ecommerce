@@ -10,6 +10,10 @@ class User(AbstractUser):
     given_name = models.CharField(max_length=40)
     family_name = models.CharField(max_length=40)
 
+    # first_name と last_name をオーバーライド
+    first_name = None
+    last_name = None
+
     REQUIRED_FIELDS = ["email", "given_name", "family_name"]
 
     def __str__(self):
