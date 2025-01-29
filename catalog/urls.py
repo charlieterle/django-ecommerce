@@ -11,5 +11,4 @@ urlpatterns = [
         views.ProductDetailView.as_view(),
         name="product-detail",
     ),
-    path("accounts/", include("django.contrib.auth.urls")),
 ]
