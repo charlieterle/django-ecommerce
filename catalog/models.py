@@ -6,7 +6,7 @@ from django.utils.timezone import now
 from django.conf import settings
 
 
-class User(AbstractUser):
+class CustomUser(AbstractUser):
     given_name = models.CharField(max_length=40)
     family_name = models.CharField(max_length=40)
 
