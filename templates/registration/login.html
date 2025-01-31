@@ -1,16 +1,15 @@
-{% extends "base_generic.html" %}
+{% extends 'base_no_login_link.html' %}
 
 {% block content %}
-
   {% if form.errors %}
     <p>ユーザー名とパスワードが一致しませんでした。認証情報をご確認の上、再度入力してください。</p>
   {% endif %}
 
   {% if next %}
     {% if user.is_authenticated %}
-      <p>このアカウントはこのページにアクセスできません。</p>
+      <p>このアカウントはこのページにアクセスできません。アクセス権限のあるアカウントを使用してください。</p>
     {% else %}
-      <p>このページを見るためにログインが必要です。</p>
+      <p>ログインしてください。</p>
     {% endif %}
   {% endif %}
 
@@ -26,11 +25,12 @@
         <td>{{ form.password }}</td>
       </tr>
     </table>
-    <input type="submit" value="login">
-    <input type="hidden" name="next" value="{{ next }}">
+    <input type="submit" value="login" />
+    <input type="hidden" name="next" value="{{ next }}" />
   </form>
 
   {# URLconfでpassword_resetビューを設定したことを前提とします #}
-  <p><a href="{% url 'password_reset' %}">パスワードをお忘れですか？</a></p>
-
+  <p>
+    <a href="{% url 'password_reset' %}">パスワードをお忘れですか？</a>
+  </p>
 {% endblock %}
