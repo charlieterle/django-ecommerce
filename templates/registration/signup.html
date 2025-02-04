@@ -1,0 +1,18 @@
+{% extends 'base_no_login_link.html' %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    <p>アカウントを登録するにはログアウトが必要です。</p>
+    <form id="logout-form" method="post" action="{% url 'logout' %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-link">ログアウト</button>
+    </form>
+  {% else %}
+    <h1>アカウント登録</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Save" />
+    </form>
+  {% endif %}
+{% endblock %}
