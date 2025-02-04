@@ -9,10 +9,11 @@
     </form>
   {% else %}
     <h1>アカウント登録</h1>
+    <p>既にアカウントをお持ちの方は<a href="{% url 'login' %}">ログインページ</a>からログインしてください</p>
     <form method="post">
       {% csrf_token %}
       {{ form.as_p }}
-      <input type="submit" value="Save" />
+      <input type="submit" value="登録" />
     </form>
   {% endif %}
 {% endblock %}
