@@ -8,17 +8,17 @@ from django.utils.translation import gettext_lazy as _
 
 admin.site.register(Product)
 
-class CustomUserCreationForm(AdminUserCreationForm):
+class CustomAdminUserCreationForm(AdminUserCreationForm):
     class Meta(AdminUserCreationForm.Meta):
         model = CustomUser
 
-class CustomUserChangeForm(UserChangeForm):
+class CustomAdminUserChangeForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
         model = CustomUser
 
 class CustomUserAdmin(UserAdmin):
-    form = CustomUserChangeForm
-    add_form = CustomUserCreationForm
+    form = CustomAdminUserChangeForm
+    add_form = CustomAdminUserCreationForm
 
     fieldsets = (
         (None, {"fields": ("username", "password")}),

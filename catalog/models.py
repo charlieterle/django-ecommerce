@@ -7,8 +7,8 @@ from django.conf import settings
 
 
 class CustomUser(AbstractUser):
-    given_name = models.CharField(max_length=40)
-    family_name = models.CharField(max_length=40)
+    family_name = models.CharField(max_length=40, verbose_name='お名前（姓）')
+    given_name = models.CharField(max_length=40, verbose_name='お名前（名）')
 
     # first_name と last_name をオーバーライド
     first_name = None
