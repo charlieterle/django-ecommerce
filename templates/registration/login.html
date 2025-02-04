@@ -8,10 +8,10 @@
   {% if next %}
     {% if user.is_authenticated %}
       <p>このアカウントはこのページにアクセスできません。アクセス権限のあるアカウントを使用してください。</p>
-    {% else %}
-      <p>ログインしてください。</p>
     {% endif %}
   {% endif %}
+
+  <h1>ログイン</h1>
 
   <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
@@ -25,12 +25,16 @@
         <td>{{ form.password }}</td>
       </tr>
     </table>
-    <input type="submit" value="login" />
+    <input type="submit" value="ログイン" />
     <input type="hidden" name="next" value="{{ next }}" />
   </form>
 
   {# URLconfでpassword_resetビューを設定したことを前提とします #}
   <p>
     <a href="{% url 'password_reset' %}">パスワードをお忘れですか？</a>
+  </p>
+
+  <p>
+    アカウントをお持ちでない方は<a href="{% url 'signup' %}">アカウント登録ページ</a>から登録してください。
   </p>
 {% endblock %}

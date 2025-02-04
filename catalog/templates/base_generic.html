@@ -34,7 +34,10 @@
                 </li>
               {% else %}
                 <li>
-                  <a href="{% url 'login' %}?next={{ request.path }}">ログイン・アカウント登録</a>
+                  <a href="{% url 'login' %}?next={{ request.path }}">ログイン</a>
+                </li>
+                <li>
+                  <a href="{% url 'signup' %}?next={{ request.path }}">アカウント登録</a>
                 </li>
               {% endif %}
             </ul>
