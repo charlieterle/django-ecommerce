@@ -7,9 +7,11 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("products/", views.ProductListView.as_view(), name="products"),
     path(
-        "product/<uuid:pk>",
+        "product/<uuid:pk>/",
         views.ProductDetailView.as_view(),
         name="product-detail",
     ),
-    path("signup/", views.UserSignupView.as_view(), name="signup")
+    path("product/create/", views.ProductCreateView.as_view(), name="product-create"),
+    path("product/update/<uuid:pk>/", views.ProductUpdateView.as_view(), name="product_update"),
+    path("signup", views.UserSignupView.as_view(), name="signup"),
 ]
