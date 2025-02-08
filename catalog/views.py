@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.decorators import login_required, permission_required
 from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
 
 
 def index(request):
@@ -28,10 +29,15 @@ class ProductDetailView(DetailView):
 class ProductCreateView(PermissionRequiredMixin, CreateView):
     """商品を作成できるビュー"""
     model = Product
-    permission_required = 'catalog.vendor_status'
     fields = ['name', 'price', 'info']
+    permission_required = 'catalog.vendor_status'
     success_url = reverse_lazy('products')
     template_name_suffix = '_create'
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.vendor = self.request.user
+        self.object.save()
+        return super().form_valid(form)
 
 
 class ProductUpdateView(PermissionRequiredMixin, UpdateView):
