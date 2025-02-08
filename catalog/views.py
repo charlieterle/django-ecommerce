@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import CustomUser, Product
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.shortcuts import render, get_object_or_404
@@ -47,6 +47,14 @@ class ProductUpdateView(PermissionRequiredMixin, UpdateView):
     fields = ['name', 'price', 'info']
     success_url = reverse_lazy('products')
     template_name_suffix = '_update'
+
+
+class ProductDeleteView(PermissionRequiredMixin, DeleteView):
+    """商品を削除するビュー"""
+    model = Product
+    permission_required = 'catalog.vendor_status'
+    success_url = reverse_lazy('products')
+    template_name_suffix = '_delete'
 
 
 class UserSignupView(SuccessMessageMixin, CreateView):
