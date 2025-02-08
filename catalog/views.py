@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView 
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import CustomUser, Product
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.shortcuts import render, get_object_or_404
@@ -10,6 +10,7 @@ from django.urls import reverse_lazy
 
 
 def index(request):
+    """ホームページのビュー"""
     return render(request, 'index.html')
 
 
@@ -26,10 +27,20 @@ class ProductDetailView(DetailView):
 
 class ProductCreateView(PermissionRequiredMixin, CreateView):
     """商品を作成できるビュー"""
-    permission_required = "catalog.vendor_status"
     model = Product
+    permission_required = 'catalog.vendor_status'
     fields = ['name', 'price', 'info']
     success_url = reverse_lazy('products')
+    template_name_suffix = '_create'
+
+
+class ProductUpdateView(PermissionRequiredMixin, UpdateView):
+    """商品を編集するビュー"""
+    model = Product
+    permission_required = 'catalog.vendor_status'
+    fields = ['name', 'price', 'info']
+    success_url = reverse_lazy('products')
+    template_name_suffix = '_update'
 
 
 class UserSignupView(SuccessMessageMixin, CreateView):
