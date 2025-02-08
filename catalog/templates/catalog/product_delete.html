@@ -1,0 +1,16 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h1>商品を削除</h1>
+<p>商品名：{{ product.name }}</p>
+<p>値段：¥{{ product.price }}</p>
+<p>販売ステータス：{{ product.get_status_display }}</p>
+<p>詳細：{{ product.info }}</p>
+
+<h2>本当に「{{ product }}」を削除しますか？</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form }}
+  <button type="submit">はい、削除します</button>
+</form>
+{% endblock %}

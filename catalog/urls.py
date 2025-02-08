@@ -12,6 +12,7 @@ urlpatterns = [
         name="product-detail",
     ),
     path("product/create/", views.ProductCreateView.as_view(), name="product-create"),
-    path("product/update/<uuid:pk>/", views.ProductUpdateView.as_view(), name="product_update"),
+    path("product/update/<uuid:pk>/", views.ProductUpdateView.as_view(), name="product-update"),
+    path("product/delete/<uuid:pk>/", views.ProductDeleteView.as_view(), name="product-delete"),
     path("signup", views.UserSignupView.as_view(), name="signup"),
 ]
