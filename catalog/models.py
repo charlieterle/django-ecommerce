@@ -75,4 +75,6 @@ class Product(models.Model):
     class Meta:
         permissions = [("vendor_status", "売り手です")]
         default_permissions = ("add", "change", "view")
+        verbose_name = "商品"
+        verbose_name_plural = "商品"
         # TODO deleteパーミッションを実装する。売り手は自分の商品しか削除できないように
