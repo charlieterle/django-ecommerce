@@ -26,19 +26,23 @@ class Product(models.Model):
     name = models.CharField(
         max_length=200,
         default="商品名未定義",
-        help_text="商品名を入力してください",
+        verbose_name="商品名"
     )
 
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
-        help_text="全商品の中にこの商品の一意の識別子",
+        help_text="商品の一意の識別子",
     )
 
     vendor = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        null=True,
+        verbose_name="売り手",
     )
-    price = models.PositiveBigIntegerField(default=0)  # JPY(円)で表します
+
+    price = models.PositiveBigIntegerField(default=0, verbose_name="値段")  # JPY(円)で表します
 
     SALE_STATUS = (
         ("f", "販売中"),
@@ -50,13 +54,14 @@ class Product(models.Model):
         choices=SALE_STATUS,
         default="f",
         help_text="商品の販売ステータス",
+        verbose_name="販売ステータス"
     )
 
-    info = models.CharField(
+    info = models.TextField(
         max_length=3000,
-        help_text="商品の詳細",
         null=True,
         blank=True,
+        verbose_name="商品の詳細",
     )
 
     def __str__(self):
