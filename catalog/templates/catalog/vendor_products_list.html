@@ -1,0 +1,16 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h1>{{ vendor }}の商品一覧</h1>
+
+  <li>
+    {% for product in products %}
+      <ul>
+        {{ product.name }}: ¥{{ product.price }}
+        <a href="{% url product - detail product.id %}">詳細</a>
+        <a href="{% url product - update product.id %}">編集</a>
+        <a href="{% url product - delete product.id %}">削除</a>
+      </ul>
+    {% endfor %}
+  </li>
+{% endblock %}

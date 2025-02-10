@@ -8,6 +8,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.decorators import login_required, permission_required
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
+from django.core.exceptions import PermissionDenied as Http403
 
 
 def index(request):
@@ -44,9 +45,15 @@ class ProductUpdateView(PermissionRequiredMixin, UpdateView):
     """商品を編集するビュー"""
     model = Product
     permission_required = 'catalog.vendor_status'
-    fields = ['name', 'price', 'info']
+    fields = ['name', 'price', 'status', 'info']
     success_url = reverse_lazy('products')
     template_name_suffix = '_update'
+    def get_object(self, *args, **kwargs):
+        obj = super().get_object(*args, **kwargs)
+        # ログイン中のユーザーが商品の売り手でない場合は403エラーを返す
+        if obj.vendor != self.request.user:
+            raise Http403 
+        return obj
 
 
 class ProductDeleteView(PermissionRequiredMixin, DeleteView):
@@ -55,6 +62,13 @@ class ProductDeleteView(PermissionRequiredMixin, DeleteView):
     permission_required = 'catalog.vendor_status'
     success_url = reverse_lazy('products')
     template_name_suffix = '_delete'
+    def get_object(self, *args, **kwargs):
+        obj = super().get_object(*args, **kwargs)
+        # ログイン中のユーザーが商品の売り手でない場合は403エラーを返す
+        if obj.vendor != self.request.user:
+            raise Http403 
+        return obj
+
 
 
 class UserSignupView(SuccessMessageMixin, CreateView):
