@@ -53,7 +53,6 @@ class Product(models.Model):
         max_length=1,
         choices=SALE_STATUS,
         default="f",
-        help_text="商品の販売ステータス",
         verbose_name="販売ステータス"
     )
 

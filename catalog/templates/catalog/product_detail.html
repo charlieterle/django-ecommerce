@@ -10,6 +10,7 @@
 <p>詳細：{{ product.info }}</p>
 
 {% if user.is_authenticated and product.vendor == user %}
+<p><a href="{% url 'product-update' product.id %}">この商品を編集</a></p>
 <p><a href="{% url 'product-delete' product.id %}">この商品を削除</a></p>
 {% endif %}
 
