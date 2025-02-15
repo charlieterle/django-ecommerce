@@ -2,9 +2,14 @@
 
 {% block content %}
 <h1>商品リスト</h1>
+
+<form method="get">
+  {{ filter.form.as_p }}
+  <input type="submit" />
+</form>
 {% if product_list %}
 <ul>
-  {% for product in product_list %}
+  {% for product in object_list %}
   <li>
     <a href="{{ product.get_absolute_url }}">{{ product }}</a>
     - ¥{{ product.price }}

@@ -2,15 +2,18 @@ from django.urls import path
 from django.urls import re_path
 from . import views
 from django.urls import include
+from django_filters.views import FilterView
+from .filters import ProductFilter
+from .models import Product
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("products/", views.ProductListView.as_view(), name="products"),
     path(
         "product/<uuid:pk>/",
         views.ProductDetailView.as_view(),
         name="product-detail",
     ),
+    path("products/", FilterView.as_view(model=Product, filterset_class=ProductFilter), name="products"),
     path("product/create/", views.ProductCreateView.as_view(), name="product-create"),
     path("product/update/<uuid:pk>/", views.ProductUpdateView.as_view(), name="product-update"),
     path("product/delete/<uuid:pk>/", views.ProductDeleteView.as_view(), name="product-delete"),

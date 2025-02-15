@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.core.exceptions import PermissionDenied as Http403
+from .filters import ProductFilter
 
 
 def index(request):
