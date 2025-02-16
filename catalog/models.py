@@ -69,6 +69,12 @@ class Product(models.Model):
         verbose_name="商品の詳細",
     )
 
+    image = models.ImageField(
+        upload_to='images/',
+        null=True,
+        blank=True
+    )
+
     def __str__(self):
         """商品を表す文字列"""
         return self.name
