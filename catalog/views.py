@@ -77,4 +77,4 @@ class UserSignupView(SuccessMessageMixin, CreateView):
     form_class = CustomUserCreationForm
     template_name = 'registration/signup.html'
     success_url = reverse_lazy('login')
-    success_message = '会員登録が成功しました。'
+    success_message = '会員登録が成功しました。ログインしてください。'
