@@ -11,6 +11,18 @@
     {% endif %}
   {% endif %}
 
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        {% if message.tags %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+        {% else %}
+          <li>{{ message }}</li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+
   <h1>ログイン</h1>
 
   <form method="post" action="{% url 'login' %}">

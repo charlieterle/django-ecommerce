@@ -42,6 +42,12 @@ class Product(models.Model):
         verbose_name="売り手",
     )
 
+    created_at = models.DateTimeField(
+        default=now,
+        verbose_name='作成日時',
+        null=False,
+    )
+
     price = models.PositiveBigIntegerField(default=0, verbose_name="値段")  # JPY(円)で表します
 
     SALE_STATUS = (
