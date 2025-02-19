@@ -10,7 +10,7 @@ class CustomUser(AbstractUser):
     family_name = models.CharField(max_length=40, verbose_name='お名前（姓）')
     given_name = models.CharField(max_length=40, verbose_name='お名前（名）')
 
-    # first_name と last_name をオーバーライド
+    # first_nameとlast_nameをオーバーライド
     first_name = None
     last_name = None
 
@@ -69,12 +69,6 @@ class Product(models.Model):
         verbose_name="商品の詳細",
     )
 
-    image = models.ImageField(
-        upload_to='images/',
-        null=True,
-        blank=True
-    )
-
     def __str__(self):
         """商品を表す文字列"""
         return self.name
@@ -89,3 +83,27 @@ class Product(models.Model):
         verbose_name = "商品"
         verbose_name_plural = "商品"
         # TODO deleteパーミッションを実装する。売り手は自分の商品しか削除できないように
+
+
+def user_directory_path(instance, filename):
+    """ユーザー名のファイルパスをURL化する関数"""
+    return "user_{0}/%Y/%m/%d/{1}".format(instance.user.id, filename)
+
+def user_image_directory_path(instance, filename):
+    """user_directory_pathを拡張してimages/ファイルパスを最初に追加する関数"""
+    return "images/" + user_directory_path(instance, filename)
+
+class Image(models.Model):
+    """写真を表すモデル"""
+
+    product = models.ForeignKey(
+        Product,
+        default=None,
+        on_delete=models.CASCADE,
+        related_name='images'
+    )
+
+    image = models.ImageField(
+        upload_to=user_image_directory_path,
+        blank=True
+    )
