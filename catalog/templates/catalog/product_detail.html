@@ -9,6 +9,13 @@
 <p>販売ステータス：{{ product.get_status_display }}</p>
 <p>詳細：{{ product.info }}</p>
 
+{% if not product.images_set %}
+<h2>商品画像</h2>
+{% endif %}
+{% for image in product.images_set %}
+<img src="{{ image.image }}" alt="{{ product }}"/>
+{% endfor %}
+
 {% if user.is_authenticated and product.vendor == user %}
 <p><a href="{% url 'product-update' product.id %}">この商品を編集</a></p>
 <p><a href="{% url 'product-delete' product.id %}">この商品を削除</a></p>
