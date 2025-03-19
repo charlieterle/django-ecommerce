@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import CustomUser, Product
-from .forms import CustomUserCreationForm, CustomUserChangeForm
+from .models import CustomUser, Product, Image
+from .forms import CustomUserCreationForm, CustomUserChangeForm, ProductCreateForm
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
@@ -27,20 +27,26 @@ class ProductDetailView(DetailView):
     """商品の詳細を表すビュー"""
     model = Product
 
-
-class ProductCreateView(PermissionRequiredMixin, CreateView):
+def product_create(request):
     """商品を作成できるビュー"""
-    model = Product
-    fields = ['name', 'price', 'info']
-    permission_required = 'catalog.vendor_status'
-    success_url = reverse_lazy('products')
-    template_name_suffix = '_create'
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.vendor = self.request.user
-        self.object.save()
-        return super().form_valid(form)
-
+    form = ProductCreateForm(request.POST, request.FILES)
+    if request.method == 'POST':
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.vendor = request.user
+            product.save()
+            images = request.FILES.getlist('images')
+            for x in request.FILES:
+                print(x)
+            print('images:', images)
+            for image in images:
+                print('image found')
+                image_ins = Image(image=image, product=product)
+                image_ins.save()
+            return HttpResponseRedirect(product.get_absolute_url())
+    else:
+        form = ProductCreateForm()
+    return render(request, 'catalog/product_create.html', {'form': form}) 
 
 class ProductUpdateView(PermissionRequiredMixin, UpdateView):
     """商品を編集するビュー"""

@@ -2,11 +2,12 @@ from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import AdminUserCreationForm, UserChangeForm
-from .models import Product, CustomUser
+from .models import CustomUser, Product, Image 
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.utils.translation import gettext_lazy as _
 
 admin.site.register(Product)
+admin.site.register(Image)
 
 class CustomAdminUserCreationForm(AdminUserCreationForm):
     class Meta(AdminUserCreationForm.Meta):

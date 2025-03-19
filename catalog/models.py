@@ -1,10 +1,12 @@
 import uuid
+import datetime
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import AbstractUser
 from django.utils.timezone import now
 from django.conf import settings
-
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 
 class CustomUser(AbstractUser):
     family_name = models.CharField(max_length=40, verbose_name='お名前（姓）')
@@ -79,22 +81,24 @@ class Product(models.Model):
 
     class Meta:
         permissions = [("vendor_status", "売り手です")]
-        default_permissions = ("add", "change", "view")
         verbose_name = "商品"
         verbose_name_plural = "商品"
-        # TODO deleteパーミッションを実装する。売り手は自分の商品しか削除できないように
 
 
 def user_directory_path(instance, filename):
     """ユーザー名のファイルパスをURL化する関数"""
-    return "user_{0}/%Y/%m/%d/{1}".format(instance.user.id, filename)
+    now = datetime.datetime.now()
+    year = now.year
+    month = now.month
+    day = now.day
+    return 'vendor_{0}/{1}/{2}/{3}/{4}'.format(instance.product.vendor.id, year, month, day, filename)
 
 def user_image_directory_path(instance, filename):
-    """user_directory_pathを拡張してimages/ファイルパスを最初に追加する関数"""
+    """user_directory_pathに images/ファイルパス を追加する関数"""
     return "images/" + user_directory_path(instance, filename)
 
 class Image(models.Model):
-    """写真を表すモデル"""
+    """画像を表すモデル"""
 
     product = models.ForeignKey(
         Product,
@@ -105,5 +109,17 @@ class Image(models.Model):
 
     image = models.ImageField(
         upload_to=user_image_directory_path,
-        blank=True
     )
+    class Meta:
+        verbose_name = "画像"
+        verbose_name_plural = "画像"
+
+#@receiver(post_delete)
+#def delete_files_when_row_deleted_from_db(sender, instance, **kwargs):
+#    """
+#    モデルが削除されると、ImageFieldが存在する時はそれに該当するファイルをも削除する関数
+#    """
+#    for field in sender._meta.concrete_fields:
+#        if isinstance(field, models.ImageField):
+#            instance_file_field = getattr(instance, field.name)
+#            instance_file_field.delete(False)
