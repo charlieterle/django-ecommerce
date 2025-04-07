@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "catalog.apps.CatalogConfig",
     "django_filters",
+    "PIL",
     "django_cleanup.apps.CleanupConfig", # この行は最後にする必要がある
 ]
 
@@ -135,4 +136,4 @@ LOGIN_REDIRECT_URL = "/catalog/"
 
 # ユーザーがアップロードしたファイルを保存するフォルダーとURL
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'

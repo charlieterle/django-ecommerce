@@ -77,7 +77,6 @@ class ProductDeleteView(PermissionRequiredMixin, DeleteView):
         return obj
 
 
-
 class UserSignupView(SuccessMessageMixin, CreateView):
     """ユーザーが登録できるビュー"""
     form_class = CustomUserCreationForm

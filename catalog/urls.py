@@ -21,6 +21,3 @@ urlpatterns = [
     path("product/delete/<uuid:pk>/", views.ProductDeleteView.as_view(), name="product-delete"),
     path("signup", views.UserSignupView.as_view(), name="signup"),
 ]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
