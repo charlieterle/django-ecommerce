@@ -172,5 +172,4 @@ cython_debug/
 
 # Files relevant to development but not to prod, such as images used for manual testing of site.
 ignore-files/
-
 media/

@@ -94,7 +94,7 @@ def user_directory_path(instance, filename):
     return 'vendor_{0}/{1}/{2}/{3}/{4}'.format(instance.product.vendor.id, year, month, day, filename)
 
 def user_image_directory_path(instance, filename):
-    """user_directory_pathに images/ファイルパス を追加する関数"""
+    """user_directory_pathに images/ を追加する関数"""
     return "images/" + user_directory_path(instance, filename)
 
 class Image(models.Model):
@@ -104,22 +104,12 @@ class Image(models.Model):
         Product,
         default=None,
         on_delete=models.CASCADE,
-        related_name='images'
     )
 
     image = models.ImageField(
         upload_to=user_image_directory_path,
     )
+
     class Meta:
         verbose_name = "画像"
         verbose_name_plural = "画像"
-
-#@receiver(post_delete)
-#def delete_files_when_row_deleted_from_db(sender, instance, **kwargs):
-#    """
-#    モデルが削除されると、ImageFieldが存在する時はそれに該当するファイルをも削除する関数
-#    """
-#    for field in sender._meta.concrete_fields:
-#        if isinstance(field, models.ImageField):
-#            instance_file_field = getattr(instance, field.name)
-#            instance_file_field.delete(False)
