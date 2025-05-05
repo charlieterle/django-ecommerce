@@ -27,7 +27,7 @@ class ProductDetailView(DetailView):
     """商品の詳細を表すビュー"""
     model = Product
 
-def product_create(request):
+def product_create_view(request):
     """商品を作成できるビュー"""
     form = ProductCreateForm(request.POST, request.FILES)
     if request.method == 'POST':
@@ -36,17 +36,28 @@ def product_create(request):
             product.vendor = request.user
             product.save()
             images = request.FILES.getlist('images')
-            for x in request.FILES:
-                print(x)
-            print('images:', images)
             for image in images:
-                print('image found')
                 image_ins = Image(image=image, product=product)
                 image_ins.save()
             return HttpResponseRedirect(product.get_absolute_url())
     else:
         form = ProductCreateForm()
     return render(request, 'catalog/product_create.html', {'form': form}) 
+
+def product_images_view(request):
+    """商品の写真を表すビュー。ここから写真の追加ビューと削除ビューに行けます。"""
+    return render(request, 'catalog/product_images.html') 
+   
+def product_image_delete_view(request, imagepk):
+    """商品の画像を削除するビュー"""
+    if request.method == 'POST':
+        if request.user != request.image.vendor:
+            raise Http403
+        image = Image.objects.get(id=imagepk)
+        product = image.product
+        image.delete()
+        return HttpResponseRedirect(product.get_absolute_url())
+    return render(request, 'catalog/product_image_delete.html', {'image': image})
 
 class ProductUpdateView(PermissionRequiredMixin, UpdateView):
     """商品を編集するビュー"""
