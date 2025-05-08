@@ -16,6 +16,6 @@ urlpatterns = [
     path("product/<uuid:pk>/update", views.ProductUpdateView.as_view(), name="product-update"),
     path("product/<uuid:pk>/delete", views.ProductDeleteView.as_view(), name="product-delete"),
     path("signup", views.UserSignupView.as_view(), name="signup"),
-    path("product/<uuid:pk>/images", views.product_images_view, name="product-images"),
-    path("images/<int:imagepk>/delete", views.product_image_delete_view, name="product-image-delete"),
+    path("product/<uuid:pk>/images", views.product_images_update_view, name="product-images-update"),
+    path("images/<int:pk>/delete", views.image_delete_view, name="image-delete"),
 ]
