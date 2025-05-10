@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import CustomUser, Product, Image
-from .forms import CustomUserCreationForm, CustomUserChangeForm, ProductCreateForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm, ProductCreateForm, MultipleImageField
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
@@ -29,8 +29,8 @@ class ProductDetailView(DetailView):
 
 def product_create_view(request):
     """商品を作成できるビュー"""
-    form = ProductCreateForm(request.POST, request.FILES)
     if request.method == 'POST':
+        form = ProductCreateForm(request.POST, request.FILES)
         if form.is_valid():
             product = form.save(commit=False)
             product.vendor = request.user
@@ -43,6 +43,21 @@ def product_create_view(request):
     else:
         form = ProductCreateForm()
     return render(request, 'catalog/product_create.html', {'form': form}) 
+
+def product_image_upload_view(request, pk=None):
+    """画像をアップロードできるビュー"""
+    product = Product.objects.get(id=pk)
+    if request.method == 'POST':
+        form = MultipleImageField(request.POST, request.FILES)
+        if form.is_valid():
+            images = request.FILES.getlist('images')
+            for image in images:
+                image_ins = Image(image=image, product=product)
+                image_ins.save()
+            return HttpResponseRedirect(product.get_absolute_url())
+    else:
+        form = MultipleImageField()
+    return render(request, 'catalog/product_image_upload.html', {'form': form})
 
 # TODO Permissionをこのビュー（あるいは他の関数のビュー）に追加
 def product_images_update_view(request, pk=None):

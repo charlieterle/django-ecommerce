@@ -18,4 +18,5 @@ urlpatterns = [
     path("signup", views.UserSignupView.as_view(), name="signup"),
     path("product/<uuid:pk>/images", views.product_images_update_view, name="product-images-update"),
     path("images/<int:pk>/delete", views.image_delete_view, name="image-delete"),
+    path("product/<uuid:pk>/product_image_upload", views.product_image_upload_view, name="product-image-upload"),
 ]

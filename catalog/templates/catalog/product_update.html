@@ -10,7 +10,12 @@
   </form>
   <p>
     <a href="{% url 'product-images-update' product.id %}">
-      商品の画像をアップデート
+      商品の画像を編集
+    </a>
+  </p>
+  <p>
+    <a href="{% url 'product-image-upload' product.id %}">
+      商品に画像を追加
     </a>
   </p>
 {% else %}
