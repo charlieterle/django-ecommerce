@@ -5,7 +5,7 @@
 <h1>商品に画像を追加</h1>
 <h2>商品：{{ product }}</h2>
 
-<form method="post">
+<form enctype="multipart/form-data" method="post">
   {% csrf_token %}
   {{ form.as_p }}
   <input type="submit" value="画像をアップロード" />
