@@ -38,6 +38,18 @@ class MultipleFileInput(forms.ClearableFileInput):
     allow_multiple_selected = True
 
 
+class ImageUploadForm(forms.Form):
+    """画像をアップロードできるフォーム"""
+    images = MultipleImageField(widget = MultipleFileInput(attrs={
+            "name": "images",
+            "type": "File",
+            "multiple": "True",
+        }),
+        required=False,
+        label='商品画像',
+    )
+
+
 class ProductCreateForm(forms.ModelForm):
     """商品作成フォーム"""
     images = MultipleImageField(widget = MultipleFileInput(attrs={
