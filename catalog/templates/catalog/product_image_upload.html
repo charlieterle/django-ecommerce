@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>商品に画像を追加</h1>
+<h2>商品：{{ product }}</h2>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="画像をアップロード" />
+</form>
+
+{% endblock %}
