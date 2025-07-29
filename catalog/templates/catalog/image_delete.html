@@ -3,7 +3,26 @@
 {% block content %}
 
 <h1>商品画像を削除</h1>
-<img src="{{ image.image.url }}"/>
+<img src="{{ image.image.url }}" class="product-image" id="enlargeable-image" style="cursor: pointer;"/>
+
+<!-- モーダル表示用 -->
+<div id="image-modal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); align-items:center; justify-content:center;">
+  <img id="modal-img" src="{{ image.image.url }}" style="max-width:90vw; max-height:90vh; border-radius:0.5rem; box-shadow:0 2px 16px rgba(0,0,0,0.3); background:#fff;"/>
+</div>
+
+<script>
+  const img = document.getElementById('enlargeable-image');
+  const modal = document.getElementById('image-modal');
+  const modalImg = document.getElementById('modal-img');
+  img.addEventListener('click', function() {
+    modal.style.display = 'flex';
+  });
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+</script>
 
 <h2>本当にこの画像を削除しますか？</h2>
 <form method="post">

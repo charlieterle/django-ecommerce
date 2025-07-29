@@ -11,10 +11,17 @@
 
 {% if product.image_set.all %}
 <h2>商品画像</h2>
+<div class="image-gallery">
 {% for image in product.image_set.all %}
-<img src="{{ image.image.url }}" alt="{{ product }}"/>
+<img src="{{ image.image.url }}" alt="{{ product }}" class="product-image enlargeable-image" /> 
 {% endfor %}
+</div>
 {% endif %}
+
+<!-- モーダル表示用 -->
+<div id="image-modal">
+  <img id="modal-img" />
+</div>
 
 {% if user.is_authenticated and product.vendor == user %}
 <p><a href="{% url 'product-update' product.id %}">この商品を編集</a></p>

@@ -10,6 +10,9 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.core.exceptions import PermissionDenied as Http403
 from .filters import ProductFilter
+from django.core.files.images import get_image_dimensions
+from django.core.exceptions import ValidationError
+from PIL import Image as PILImage, UnidentifiedImageError
 
 
 def index(request):
@@ -29,6 +32,7 @@ class ProductDetailView(DetailView):
 
 def product_create_view(request):
     """商品を作成できるビュー"""
+    error_message = None
     if request.method == 'POST':
         form = forms.ProductCreateForm(request.POST, request.FILES)
         if form.is_valid():
@@ -37,12 +41,21 @@ def product_create_view(request):
             product.save()
             images = request.FILES.getlist('images')
             for image in images:
+                try:
+                    # PILで画像検証
+                    PILImage.open(image).verify()
+                except (UnidentifiedImageError, ValidationError, OSError):
+                    error_message = 'アップロードされたファイルの中に画像でないものがあります。画像ファイルのみアップロードしてください。'
+                    product.delete()  # 不正な画像があれば商品も保存しない
+                    break
                 image_ins = Image(image=image, product=product)
                 image_ins.save()
+            if error_message:
+                return render(request, 'catalog/product_create.html', {'form': form, 'error_message': error_message})
             return HttpResponseRedirect(product.get_absolute_url())
     else:
         form = forms.ProductCreateForm()
-    return render(request, 'catalog/product_create.html', {'form': form}) 
+    return render(request, 'catalog/product_create.html', {'form': form})
 
 def product_image_upload_view(request, pk=None):
     """画像をアップロードできるビュー"""
