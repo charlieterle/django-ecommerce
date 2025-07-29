@@ -1,18 +1,114 @@
+body {
+  background: #fff;
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+  color: #222;
+}
+
 .sidebar-nav {
-    margin-top: 20px;
-    padding: 0;
-    list-style: none;
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
+  font-weight: 700;
+}
+
+.sidebar-nav a {
+  display: block;
+  padding: 0.25em 1em;
+  color: #007bff;
+  border-radius: 0.25rem;
+  text-decoration: underline;
+  font-weight: 500;
+  transition: background 0s, color 0s;
+}
+.sidebar-nav a:hover, .sidebar-nav a:focus {
+  background: #e9ecef;
+  color: #0056b3;
+  text-decoration: underline;
 }
 
 #logout-form {
-    display: inline;
+  display: inline;
 }
 
 #logout-form button {
-    padding: 0;
-    margin: 0;
+  padding: 0.5em 1.2em;
+  margin: 0.5em 0;
+  font-size: 1rem;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  transition: background 0s;
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+}
+#logout-form button:hover {
+  background: #0056b3;
 }
 
 #username-sidebar {
-    margin-top: 1.5em;
+  margin-top: 1em;
+}
+
+.btn, button, input[type="submit"] {
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  padding: 0.5em 1.2em;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  transition: background 0s;
+}
+.btn:hover, button:hover, input[type="submit"]:hover {
+  background: #0056b3;
+}
+
+img.product-image, .product-image {
+  max-width: 220px;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 0.25rem;
+  margin: 0.5em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  cursor: pointer;
+}
+
+.image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.pagination {
+  margin-top: 2em;
+  text-align: center;
+}
+
+.page-links a, .page-current {
+  margin: 0 0.5em;
+  font-weight: 500;
+}
+
+#image-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  align-items: center;
+  justify-content: center;
+}
+
+#modal-img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+  background: #fff;
 }
