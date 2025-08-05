@@ -4,4 +4,24 @@
 {% endblock %}
 
 {% block content %}
+<div class="container mt-4">
+  <h2>おすすめ商品</h2>
+  <div class="row image-gallery">
+    {% for product in random_products %}
+      <div class="col-6 col-md-3 mb-4 d-flex flex-column align-items-center">
+        {% if product.image_set.first %}
+          <a href="{{ product.get_absolute_url }}">
+            <img src="{{ product.image_set.first.image.url }}" alt="{{ product }}" class="product-image enlargeable-image" style="cursor:pointer;"/>
+          </a>
+        {% endif %}
+        <div class="mt-2 text-center">
+          <a href="{{ product.get_absolute_url }}" class="fw-bold">{{ product.name }}</a><br/>
+          <span>¥{{ product.price }}</span>
+        </div>
+      </div>
+    {% empty %}
+      <p>商品がありません。</p>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}

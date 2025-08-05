@@ -13,11 +13,18 @@ from .filters import ProductFilter
 from django.core.files.images import get_image_dimensions
 from django.core.exceptions import ValidationError
 from PIL import Image as PILImage, UnidentifiedImageError
+import random
 
 
 def index(request):
-    """ホームページのビュー"""
-    return render(request, 'index.html')
+    """ホームページのビュー: ランダムな商品を表示（IDのみ取得してからランダム選択）"""
+    randomcount = 8  # ランダムに表示する商品の数
+    product_ids = list(Product.objects.values_list('id', flat=True))
+    random.shuffle(product_ids)
+    selected_ids = set(product_ids[:randomcount])
+    random_products = list(Product.objects.filter(id__in=selected_ids))
+    random.shuffle(random_products)
+    return render(request, 'index.html', {'random_products': random_products})
 
 
 class ProductListView(ListView):
