@@ -13,56 +13,59 @@
     <link rel="stylesheet" href="{{ cssurl|add:'?'|add:nowtime }}" />
     {% static 'js/styles.js' as jsurl %}
     <script defer src="{{ jsurl|add:'?'|add:nowtime }}"></script>
-    {% block title %}
-      <title>E-Commerce Bazaar</title>
-    {% endblock %}
   </head>
 
   <body>
+    <div id="demo-banner" class="alert alert-danger alert-dismissible fade show text-center fw-bold" role="alert">
+      <span>このサイトはデモ用です。掲載されている商品は全て架空であり、実際に購入することはできません。</span>
+      <button type="button" class="btn-close btn-close-white position-absolute top-50 end-0 translate-middle-y me-3" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom mb-4">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="{% url 'index' %}">E-Commerce Bazaar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'index' %}">ホームページ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'products' %}">商品一覧</a>
+            </li>
+            {% if user.is_authenticated and perms.catalog.vendor_status %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'product-create' %}">商品を作成</a>
+            </li>
+            {% endif %}
+          </ul>
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <span id="username-navbar" class="navbar-text me-2">ユーザー名: {{ user.get_username }}</span>
+              </li>
+              <li class="nav-item">
+                <form id="logout-form" method="post" action="{% url 'logout' %}" class="d-inline">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-primary btn-sm">ログアウト</button>
+                </form>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}?next={{ request.path }}">ログイン</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'signup' %}?next={{ request.path }}">アカウント登録</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-2">
-          {% block sidebar %}
-            <ul class="sidebar-nav">
-              <li>
-                <a href="{% url 'index' %}">ホームページ</a>
-              </li>
-              <li>
-                <a href="{% url 'products' %}">商品一覧</a>
-              </li>
-              {% if user.is_authenticated and perms.catalog.vendor_status %}
-              <hr/>
-              <li>
-                売り手メニュー
-              </li>
-              <li>
-                <a href="{% url 'product-create' %}">商品を作成</a>
-              </li>
-              {% endif %}
-              <hr/>
-              {% if user.is_authenticated %}
-                <li id="username-sidebar">ユーザー名: {{ user.get_username }}</li>
-                <li>
-                  <form id="logout-form" method="post" action="{% url 'logout' %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-link">ログアウト</button>
-                  </form>
-                </li>
-              {% endif %}
-              {% block loginlink %}
-                {% if not user.is_authenticated %}
-                  <li>
-                    <a href="{% url 'login' %}?next={{ request.path }}">ログイン</a>
-                  </li>
-                  <li>
-                    <a href="{% url 'signup' %}?next={{ request.path }}">アカウント登録</a>
-                  </li>
-                {% endif %}
-              {% endblock %}
-            </ul>
-          {% endblock %}
-        </div>
-        <div class="col-sm-10">
+        <div class="col-12">
           {% block content %}
 
           {% endblock %}

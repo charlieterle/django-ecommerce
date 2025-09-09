@@ -1,3 +1,15 @@
+document.addEventListener('DOMContentLoaded', function() {
+  var banner = document.getElementById('demo-banner');
+  if (banner) {
+    var closeBtn = banner.querySelector('.btn-close');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function() {
+        banner.style.display = 'none';
+      });
+    }
+  }
+});
+
 document.querySelectorAll('.enlargeable-image').forEach(function (img) {
     img.addEventListener('click', function () {
         const modal = document.getElementById('image-modal');
