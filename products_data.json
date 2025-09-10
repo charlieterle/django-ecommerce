@@ -1,0 +1,146 @@
+[
+  {
+    "name": "カラフルなマグカップ",
+    "info": "毎日のコーヒータイムが楽しくなるカラフルなマグカップ。電子レンジ・食洗機対応。",
+    "price": 1200,
+    "image_url": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "シンプルなノート",
+    "info": "ビジネスにも勉強にも使えるシンプルなA5ノート。80ページ。",
+    "price": 450,
+    "image_url": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "おしゃれなペンケース",
+    "info": "コンパクトで持ち運びやすい、おしゃれなペンケース。",
+    "price": 980,
+    "image_url": "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "北欧風クッション",
+    "info": "リビングを彩る北欧風デザインのクッションカバー。",
+    "price": 1800,
+    "image_url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "レトロな目覚まし時計",
+    "info": "クラシックなデザインの目覚まし時計。インテリアにも最適。",
+    "price": 2200,
+    "image_url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "木製カトラリーセット",
+    "info": "エコでおしゃれな木製カトラリーセット。",
+    "price": 1100,
+    "image_url": "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "北欧風ランプ",
+    "info": "やさしい光で部屋を照らす北欧風ランプ。",
+    "price": 3500,
+    "image_url": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "シンプルなトートバッグ",
+    "info": "普段使いにぴったりなシンプルデザインのトートバッグ。",
+    "price": 1600,
+    "image_url": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "カフェ風グラス",
+    "info": "おうちカフェ気分を味わえるおしゃれなグラス。",
+    "price": 700,
+    "image_url": "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "デザインノートPCケース",
+    "info": "ノートPCをおしゃれに守るデザインケース。",
+    "price": 2500,
+    "image_url": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "ミニ観葉植物",
+    "info": "デスクや棚にぴったりのミニ観葉植物。癒しのグリーン。",
+    "price": 900,
+    "image_url": "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "ガラスの花瓶",
+    "info": "シンプルで美しいガラスの花瓶。どんな花にも合います。",
+    "price": 1300,
+    "image_url": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "ふわふわブランケット",
+    "info": "肌触り抜群のふわふわブランケット。",
+    "price": 2100,
+    "image_url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "カラフルなマグネットセット",
+    "info": "冷蔵庫やホワイトボードに便利なマグネットセット。",
+    "price": 600,
+    "image_url": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "和風湯のみ",
+    "info": "日本の伝統を感じる和風デザインの湯のみ。",
+    "price": 800,
+    "image_url": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "折りたたみ傘",
+    "info": "持ち運びに便利な軽量折りたたみ傘。",
+    "price": 1200,
+    "image_url": "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "北欧風スリッパ",
+    "info": "おしゃれで履き心地の良い北欧風スリッパ。",
+    "price": 1400,
+    "image_url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "デザインマウスパッド",
+    "info": "デスク周りを彩るデザインマウスパッド。",
+    "price": 950,
+    "image_url": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "シンプルな水筒",
+    "info": "保温・保冷どちらもOKなシンプル水筒。",
+    "price": 1800,
+    "image_url": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "カフェ風コースターセット",
+    "info": "おしゃれなカフェ風コースター4枚セット。",
+    "price": 700,
+    "image_url": "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "北欧風ティーポット",
+    "info": "紅茶タイムが楽しくなる北欧風ティーポット。",
+    "price": 3200,
+    "image_url": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "デザイン時計",
+    "info": "壁掛けにも卓上にも使えるデザイン時計。",
+    "price": 2700,
+    "image_url": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "シンプルなエコバッグ",
+    "info": "買い物に便利なシンプルエコバッグ。",
+    "price": 900,
+    "image_url": "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80"
+  },
+  {
+    "name": "カラフルなボールペンセット",
+    "info": "書き心地なめらかなカラフルボールペン5本セット。",
+    "price": 650,
+    "image_url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
+  }
+]
