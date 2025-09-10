@@ -1,7 +1,15 @@
 body {
-  background: #fff;
+  background: #f8f9fa;
   font-family: 'Segoe UI', 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
   color: #222;
+}
+
+.navbar, .navbar.bg-white {
+  background-color: #f8f9fa !important;
+}
+
+.card, .dropdown-menu, .container, .container-fluid, .pagination, .form-control, .modal-content {
+  background-color: #f8f9fa !important;
 }
 
 .sidebar-nav {
@@ -111,4 +119,68 @@ img.product-image, .product-image {
   border-radius: 0.5rem;
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
   background: #fff;
+}
+
+#username-navbar {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+#demo-banner {
+  position: relative;
+  z-index: 1050;
+  background: #ff3860;
+  color: #fff;
+  border: none;
+  border-radius: 0;
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+  padding: 1rem 3rem 1rem 1rem;
+}
+#demo-banner .btn-close {
+  position: absolute;
+  top: 50%;
+  right: 1.5rem;
+  transform: translateY(-50%);
+  filter: none;
+  opacity: 0.8;
+  transition: transform 0.15s cubic-bezier(.4,2,.6,1), opacity 0.15s;
+  background: none;
+  color: inherit;
+  width: 2.2rem;
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+#demo-banner .btn-close::after {
+  content: '×';
+  font-size: 1.7rem;
+  color: #fff;
+  line-height: 1;
+  font-weight: bold;
+  display: block;
+  margin-top: 0.05em;
+}
+#demo-banner .btn-close > svg,
+#demo-banner .btn-close > span {
+  display: none !important;
+}
+#demo-banner .btn-close:hover {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.3);
+  background: none;
+  color: #fff;
+}
+#demo-banner .btn-close {
+  box-shadow: none;
+  border: none;
+}
+#demo-banner .btn-close:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #fff6, 0 0 0 4px #ff3860;
 }

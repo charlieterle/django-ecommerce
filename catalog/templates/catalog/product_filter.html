@@ -1,22 +1,37 @@
 {% extends 'base_generic.html' %}
 
 {% block content %}
-<h1>商品リスト</h1>
-
-<form method="get">
-  {{ filter.form.as_p }}
-  <input type="submit" />
-</form>
-{% if product_list %}
-<ul>
-  {% for product in object_list %}
-  <li>
-    <a href="{{ product.get_absolute_url }}">{{ product }}</a>
-    - ¥{{ product.price }}
-  </li>
-  {% endfor %}
-</ul>
-{% else %}
-<p>このカタログには商品がございません。</p>
-{% endif %}
+<div class="container-fluid">
+  <div class="row">
+    <aside class="col-md-3 mb-4">
+      <div class="card p-3 mb-3">
+        <h5 class="mb-3">絞り込み</h5>
+        <form method="get">
+          {{ filter.form.as_p }}
+          <input type="submit" class="btn btn-primary w-100" value="検索" />
+        </form>
+      </div>
+    </aside>
+    <main class="col-md-9">
+      <h1 class="mb-4">商品リスト</h1>
+      {% if product_list %}
+      <div class="row image-gallery">
+        {% for product in object_list %}
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 d-flex flex-column align-items-center">
+          <a href="{{ product.get_absolute_url }}">
+            {% if product.image_set.first %}
+              <img src="{{ product.image_set.first.image.url }}" alt="{{ product }}" class="product-image"/>
+            {% endif %}
+            <div class="mt-2 text-center fw-bold">{{ product.name }}</div>
+          </a>
+          <div class="text-center">¥{{ product.price }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p>このカタログには商品がございません。</p>
+      {% endif %}
+    </main>
+  </div>
+</div>
 {% endblock %}
