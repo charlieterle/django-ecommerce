@@ -176,3 +176,6 @@ media/
 
 # Mac DSSTORE file
 .DS_Store
+
+# VSCode settings
+.vscode/
