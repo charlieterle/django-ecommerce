@@ -78,5 +78,5 @@ for fname in os.listdir(demo_dir):
     try:
         os.remove(fpath)
     except Exception as e:
-    print(f"{fpath} の削除に失敗しました: {e}")
+        print(f"{fpath} の削除に失敗しました: {e}")
 os.rmdir(demo_dir)
