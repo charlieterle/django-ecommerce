@@ -180,8 +180,5 @@ media/
 # VSCode settings
 .vscode/
 
-# Requirements
-requirements.txt
-
 # zappa_settings file
 zappa_settings.json
