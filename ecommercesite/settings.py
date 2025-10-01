@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django_filters",
     "PIL",
     "django_cleanup.apps.CleanupConfig", # この行は最後にする必要がある
+    "storages",
 ]
 
 MIDDLEWARE = [
@@ -118,8 +119,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -131,6 +131,34 @@ AUTH_USER_MODEL = "catalog.CustomUser"
 
 LOGIN_REDIRECT_URL = "/catalog/"
 
-# ユーザーがアップロードしたファイルを保存するフォルダーとURL
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+
+STORAGES = {
+    'default': {
+        'BACKEND': 'storages.backends.s3.S3Storage',
+    },
+    'staticfiles': {
+        'BACKEND': 'storages.backends.s3.S3Storage',
+    },
+}
+
+S3_BUCKET_ID = config("S3_BUCKET_ID")
+
+AWS_STORAGE_BUCKET_NAME = S3_BUCKET_ID
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % S3_BUCKET_ID
+STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max - age=86400',
+}
+
+# ユーザーがアップロードしたファイルを保存するURL
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
+
+AWS_REGION = config("AWS_REGION")
+
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+AWS_SESSION_TOKEN = os.environ['AWS_SESSION_TOKEN']
+
+# AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
