@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     "catalog.apps.CatalogConfig",
     "django_filters",
     "PIL",
-    "django_cleanup.apps.CleanupConfig", # この行は最後にする必要がある
     "storages",
+    "django_cleanup.apps.CleanupConfig", # この行は最後にする必要がある
 ]
 
 MIDDLEWARE = [
@@ -156,9 +156,5 @@ MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
 
 AWS_REGION = config("AWS_REGION")
 
-AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-AWS_SESSION_TOKEN = os.environ['AWS_SESSION_TOKEN']
-
-# AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-# AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
