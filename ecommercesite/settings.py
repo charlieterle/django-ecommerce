@@ -129,7 +129,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # カスタムユーザーモデルを登録
 AUTH_USER_MODEL = "catalog.CustomUser"
 
-LOGIN_REDIRECT_URL = "/catalog/"
+LOGIN_REDIRECT_URL = "/prod/catalog/"
 
 
 STORAGES = {
